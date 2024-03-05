@@ -1,0 +1,11 @@
+# development dependencies
+/node_modules
+
+# temp files
+yarn.lock
+
+# parcel temp files
+/.parcel-cache
+
+# builded files folder
+# /dist

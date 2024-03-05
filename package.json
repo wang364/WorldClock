@@ -1,0 +1,14 @@
+{
+  "name": "World Clock",
+  "version": "1.0.0",
+  "description": "A power-up for world clock.",
+  "repository": "https://github.com/wang364/WorldClock.git",
+  "author": "bowang",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/html/*.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  }
+}
