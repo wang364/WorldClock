@@ -5,7 +5,16 @@ $(function () {
 
   autocomplete(document.getElementById("timezone"), cities);
 
+  
 });
+
+$('#datepicker').on('click', function() {
+  $('#datepicker').datepicker({
+    format: 'yyyy-mm-dd', // 日期格式
+    autoclose: true // 选择日期后自动关闭
+  });
+});
+
 
 
 async function fetchData() {
