@@ -9,3 +9,6 @@ yarn.lock
 
 # builded files folder
 /dist
+
+# vscode setting
+/.rmv

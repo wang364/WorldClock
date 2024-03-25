@@ -1,108 +1,121 @@
-/*==================== CLOCK ====================*/
-const hour = document.getElementById('clock-hour'),
-      minutes = document.getElementById('clock-minutes'),
-      seconds = document.getElementById('clock-seconds')
+// Document ready
+$(function () {
+  // city country timezone ...
+  var cities = fetchData();
 
-const clock = () =>{
-    let date = new Date()
+  autocomplete(document.getElementById("timezone"), cities);
 
-    let hh = date.getHours() * 30,
-        mm = date.getMinutes() * 6,
-        ss = date.getSeconds() * 6
-        
-    // We add a rotation to the elements
-    hour.style.transform = `rotateZ(${hh + mm / 12}deg)`
-    minutes.style.transform = `rotateZ(${mm}deg)`
-    seconds.style.transform = `rotateZ(${ss}deg)`
-}
-setInterval(clock, 1000) // 1000 = 1s
+});
 
-/*==================== CLOCK & DATE TEXT ====================*/
-const textHour = document.getElementById('text-hour'),
-      textMinutes = document.getElementById('text-minutes'),
-      textAmPm = document.getElementById('text-ampm'),
-    //   dateWeek = document.getElementById('date-day-week'),
-      dateDay = document.getElementById('date-day'),
-      dateMonth = document.getElementById('date-month'),
-      dateYear = document.getElementById('date-year')
 
-const clockText = () =>{
-    let date = new Date()
-
-    let hh = date.getHours(),
-        ampm,
-        mm = date.getMinutes(),
-        day = date.getDate(),
-        // dayweek = date.getDay(),
-        month = date.getMonth(),
-        year = date.getFullYear()
-
-    // We change the hours from 24 to 12 hours and establish whether it is AM or PM
-    if(hh >= 12){
-        hh = hh - 12
-        ampm = 'PM'
-    }else{
-        ampm = 'AM'
+async function fetchData() {
+  try {
+    const response = await fetch('../data/cityMap.json');
+    if (!response.ok) {
+      throw new Error('NOK');
     }
-
-    // We detect when it's 0 AM and transform to 12 AM
-    if(hh == 0){hh = 12}
-
-    // Show a zero before hours
-    if(hh < 10){hh = `0${hh}`}
-
-    // Show time
-    textHour.innerHTML = `${hh}:`
-    
-    // Show a zero before the minutes
-    if(mm < 10){mm = `0${mm}`}
-    
-    // Show minutes
-    textMinutes.innerHTML = mm
-
-    // Show am or pm
-    textAmPm.innerHTML = ampm
-
-    // If you want to show the name of the day of the week
-    // let week = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
-
-    // We get the months of the year and show it
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-    // We show the day, the month and the year
-    dateDay.innerHTML = day
-    // dateWeek.innerHTML = `${week[dayweek]}`
-    dateMonth.innerHTML = `${months[month]},`
-    dateYear.innerHTML = year
-}
-setInterval(clockText, 1000) // 1000 = 1s
-
-/*==================== DARK/LIGHT THEME ====================*/
-const themeButton = document.getElementById('theme-button')
-const darkTheme = 'dark-theme'
-const iconTheme = 'bxs-sun'
-
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
-
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bxs-moon' : 'bxs-sun'
-
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'bxs-moon' ? 'add' : 'remove'](iconTheme)
+    return await response.json();
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-})
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+
+
+

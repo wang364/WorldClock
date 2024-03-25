@@ -1,5 +1,5 @@
-var WHITE_ICON = 'https://icanhazdadjoke.com/static/smile.svg';
-var BLACK_ICON = 'https://icanhazdadjoke.com/static/smile.svg';
+var WHITE_ICON = 'https://icanhazdadjoke.com/static/world_clock.svg';
+var BLACK_ICON = 'https://icanhazdadjoke.com/static/world_clock.svg';
 
 var onBtnClick = function (t, opts) {
     return t.modal({
