@@ -14,7 +14,7 @@ $(function () {
 });
 
 /*** input city suggest */
-const search = document.getElementById('timezone');
+const inputSearch = document.getElementById('timezone');
 const matchList = document.getElementById('match-list');
 
 const searchCities = async searchText => {
@@ -41,7 +41,7 @@ const outputHtml = (matches, maxItems = 5) => {
     const html = displayMatches
       .map(
         (match) => `
-        <li><a class="dropdown-item rounded-2" href="#">
+        <li><a class="dropdown-item rounded-2" href="#" data-timezone="${match.timezone}" data-country="${match.country}" data-city="${match.city}">
         ${match.country}, ${match.city}
         </a></li>
     `
@@ -50,13 +50,35 @@ const outputHtml = (matches, maxItems = 5) => {
 
     matchList.innerHTML = html;
     matchList.classList.remove("d-none");
+
+    // 为每个链接添加点击事件监听器
+    const links = matchList.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        //event.preventDefault(); // 阻止默认的链接行为
+        const timezone = this.getAttribute('data-timezone');
+        const country = this.getAttribute('data-country');
+        const city = this.getAttribute('data-city');
+        console.log(country);
+        performAction(timezone, country, city); // 执行你的JavaScript操作
+      });
+    });
   } else {
     matchList.innerHTML = "";
     matchList.classList.add("d-none");
   }
 };
 
-search.addEventListener('input', () => searchCities(search.value));
+inputSearch.addEventListener('input', () => searchCities(inputSearch.value));
+
+// 定义你想要执行的操作
+function performAction(timezone, country, city) {
+  
+  matchList.innerHTML = "";
+  matchList.classList.add("d-none");
+  inputSearch.value = "";
+}
+
 
 function formatDate() {
   var d = new Date(),
