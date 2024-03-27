@@ -77,6 +77,16 @@ function performAction(timezone, country, city) {
   matchList.innerHTML = "";
   matchList.classList.add("d-none");
   inputSearch.value = "";
+
+  const requestUrl = `http://worldtimeapi.org/api/timezone/${timezone}`;
+  console.log(requestUrl);
+  fetch(requestUrl)
+  .then((r) => r.json())
+  .then((data) => {
+    console.log(data);
+    
+  })
+  .catch(error => console.error('Error:', error));
 }
 
 
