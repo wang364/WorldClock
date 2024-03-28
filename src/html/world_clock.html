@@ -15,9 +15,9 @@
 </head>
 
 <body>
-  <div class="container mt-3">
-    <!--==================== search line begin ====================-->
-    <div class="row">
+  <div class="container world-clock">
+    <!--==================== search line ====================-->
+    <div class="row toolbar">
       <div class="col-3">
         <!-- search autocomplete -->
         <div class="input-group">
@@ -49,70 +49,9 @@
         </div>
       </div>
     </div>
-    <!--==================== search line end ====================-->
-    <div class="container"> <!-- timezone erea -->
-      <div class="row" data-itemidx="0">
-        <div class="col-auto ">
-          <div class="d-grid">
-            <button type="button" class="btn btn-default btn-sm">
-              <i class="fa fa-sort-asc" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn btn-default btn-sm">
-              <i class="fa fa-sort-desc" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <div class="col-auto location" style="cursor: move;">
-          <div class="city"><b>Beijing</b> <small original-title="CST = GMT+8">CST</small></div>
-          <div class="country">China</div>
-        </div>
-        <div class="col-auto data " style="cursor: move;">
-          <div class="time"><span class="th">10</span><span class="ts">:</span><span class="tm">19</span><span class="ampm"></span></div>
-          <div class="date">Wed, Mar 27</div>
-          <div class="data-end">
-            <div class="time"><span class="separ">-</span><span class="th">09</span><span class="ts">:</span><span class="tm">55</span><span class="ampm"></span></div>
-            <div class="date">Wed, Mar 27</div>
-          </div>
-        </div>
-        <div class="col hourline">
-          <ul class="_24 m00">
-            <li class="tod_c" t="3/27/2024 00:00">
-              <div>Wed</div><b>Mar</b><i>27</i>
-            </li>
-            <li class="tod_n" t="3/27/2024 01:00"><b>1</b><em> CST </em><em></em></li>
-            <li class="tod_n" t="3/27/2024 02:00"><b>2</b><em> CST </em><em></em></li>
-            <li class="tod_n" t="3/27/2024 03:00"><b>3</b><em> CST </em><em></em></li>
-            <li class="tod_n" t="3/27/2024 04:00"><b>4</b><em> CST </em><em></em></li>
-            <li class="tod_n" t="3/27/2024 05:00"><b>5</b><em> CST </em><em></em></li>
-            <li class="tod_m" t="3/27/2024 06:00"><b>6</b><em> CST </em><em></em></li>
-            <li class="tod_m" t="3/27/2024 07:00"><b>7</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 08:00"><b>8</b><em> CST </em><em></em></li>
-            <li class="tod_d tod_selected" t="3/27/2024 09:00"><b>9</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 10:00"><b>10</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 11:00"><b>11</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 12:00"><b>12</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 13:00"><b>13</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 14:00"><b>14</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 15:00"><b>15</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 16:00"><b>16</b><em> CST </em><em></em></li>
-            <li class="tod_d" t="3/27/2024 17:00"><b>17</b><em> CST </em><em></em></li>
-            <li class="tod_e" t="3/27/2024 18:00"><b>18</b><em> CST </em><em></em></li>
-            <li class="tod_e" t="3/27/2024 19:00"><b>19</b><em> CST </em><em></em></li>
-            <li class="tod_e" t="3/27/2024 20:00"><b>20</b><em> CST </em><em></em></li>
-            <li class="tod_e" t="3/27/2024 21:00"><b>21</b><em> CST </em><em></em></li>
-            <li class="tod_n" t="3/27/2024 22:00"><b>22</b><em> CST </em><em></em></li>
-            <li class="tod_n tod_boundary" t="3/27/2024 23:00"><b>23</b><em> CST </em><em></em></li>
-            <li style="display: none" class="tod_c" t="3/28/2024 00:00">
-              <div>Thu</div><b>Mar</b><i>28</i>
-            </li>
-          </ul>
-        </div>
-        <div class="col-auto">
-          <button type="button" class="btn btn-default">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
+    <!--==================== timezone erea ====================-->
+    <div class="container" id="city-list">
+
     </div>
   </div>
   

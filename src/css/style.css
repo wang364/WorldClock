@@ -1,4 +1,68 @@
-
-.container {
-  background-color:rgb(238, 243, 247);
+.world-clock {
+  border: 0.1rem outset;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin: 2rem;
 }
+.toolbar {
+  background-color:rgb(223, 220, 220);
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: outset;
+}
+
+.fs-sm {
+  font-size: 0.75rem;
+}
+
+.btn-pad {
+  padding: 0.0rem 0.25rem;
+}
+
+.col-pad {
+  padding: 0.25rem;
+}
+
+.hour {
+  width: 1.65rem;
+  padding: 0;
+  text-align: center;
+}
+
+.hours-24 {
+  border: solid;
+  border-radius: 6px;
+  border-color: #8ba3c9;
+  display:inline-flex;
+}
+
+:root {
+  --hour-color-day: #fffff3;    /* 白天，黄色 */
+  --hour-color-rest: #daf6fd; /* 下午，浅绿色 */
+  --hour-color-sleep: #95b3d7;  /* 傍晚，浅蓝色 */
+}
+
+.hour-0 { background-color: var(--hour-color-sleep); }
+.hour-1 { background-color: var(--hour-color-sleep); }
+.hour-2 { background-color: var(--hour-color-sleep); }
+.hour-3 { background-color: var(--hour-color-sleep); }
+.hour-4 { background-color: var(--hour-color-sleep); }
+.hour-5 { background-color: var(--hour-color-sleep); }
+.hour-6 { background-color: var(--hour-color-rest); }
+.hour-7 { background-color: var(--hour-color-rest); }
+.hour-8 { background-color: var(--hour-color-day); }
+.hour-9 { background-color: var(--hour-color-day); }
+.hour-10 { background-color: var(--hour-color-day); }
+.hour-11 { background-color: var(--hour-color-day); }
+.hour-12 { background-color: var(--hour-color-day); }
+.hour-13 { background-color: var(--hour-color-day); }
+.hour-14 { background-color: var(--hour-color-day); }
+.hour-15 { background-color: var(--hour-color-day); }
+.hour-16 { background-color: var(--hour-color-day); }
+.hour-17 { background-color: var(--hour-color-day); }
+.hour-18 { background-color: var(--hour-color-rest); }
+.hour-19 { background-color: var(--hour-color-rest); }
+.hour-20 { background-color: var(--hour-color-rest); }
+.hour-21 { background-color: var(--hour-color-rest); }
+.hour-22 { background-color: var(--hour-color-sleep); }
+.hour-23 { background-color: var(--hour-color-sleep); }
